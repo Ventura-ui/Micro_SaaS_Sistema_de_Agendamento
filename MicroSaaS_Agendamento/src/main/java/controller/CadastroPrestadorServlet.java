@@ -1,4 +1,4 @@
-package controller.prestador;
+package controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import jakarta.servlet.http.Part;
 import model.Prestador;
 import utils.ConnectionFactory;
 
-@WebServlet("/prestador/cadastroPrestador")
+@WebServlet("/cadastroPrestador")
 @MultipartConfig
 public class CadastroPrestadorServlet extends HttpServlet{
 	
@@ -31,7 +31,7 @@ public class CadastroPrestadorServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cliente/cadastroPrestador.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cadastroPrestador.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

@@ -1,4 +1,4 @@
-package controller.cliente;
+package controller;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,14 +13,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Cliente;
 import utils.ConnectionFactory;
 
-@WebServlet("/cliente/cadastroCliente")
+@WebServlet("/cadastroCliente")
 public class CadastroClienteServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cliente/cadastroCliente.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cadastroCliente.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

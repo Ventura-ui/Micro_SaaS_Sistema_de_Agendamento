@@ -15,8 +15,8 @@
     <br><br>
     
     <p><a href="login.jsp">FAZER LOGIN</a></p><br><br>
-    <p><a href="cliente/cadastroCliente.jsp">FAZER CADASTRO COMO CLIENTE</a></p><br><br>
-    <p><a href="prestador/cadastroPrestador.jsp">FAZER CADASTRO COMO PRESTADOR</a></p><br><br>
+    <p><a href="cadastroCliente.jsp">FAZER CADASTRO COMO CLIENTE</a></p><br><br>
+    <p><a href="cadastroPrestador.jsp">FAZER CADASTRO COMO PRESTADOR</a></p><br><br>
     
     <br><br>
     <hr>

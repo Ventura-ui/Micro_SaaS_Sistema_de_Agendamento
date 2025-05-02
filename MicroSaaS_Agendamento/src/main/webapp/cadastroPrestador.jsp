@@ -25,9 +25,9 @@
 		Nome completo: <input type="text" name="nome_completo" required="required"><br> <br>
 		Descrição: <input type="text" name="descricao" required="required"><br> <br>
 		Cidade: <select name="endereco" required="required">
-			<option value="São Paulo">Araraquara</option>
-			<option value="Rio de Janeiro">São Carlos</option>
-			<option value="Belo Horizonte">Matão</option><br> <br>
+			<option value="Araraquara">Araraquara</option>
+			<option value="São Carlos">São Carlos</option>
+			<option value="Matão">Matão</option><br> <br>
 	
 		
 		</select><br> <br> Foto de perfil/logo: <input type="file" name="foto_perfil" required="required"

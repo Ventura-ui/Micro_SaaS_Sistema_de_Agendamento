@@ -3,6 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Cliente;
 import model.Prestador;
@@ -63,5 +66,60 @@ public class PrestadorDAO {
 		
 		return null;
 	}
+	
+	public List<Prestador> buscarPorCidade(Connection conn, String cidade) {
+        List<Prestador> lista = new ArrayList<>();
+        String sql = "SELECT * FROM Prestador WHERE endereco LIKE ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + (cidade != null ? cidade : "") + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Prestador prestador = new Prestador();
+                prestador.setId_prestador(rs.getInt("id_prestador"));
+                prestador.setNome_fantasia(rs.getString("nome_fantasia"));
+                prestador.setNome_completo(rs.getString("nome_completo"));
+                prestador.setFoto_perfil(rs.getString("foto_perfil"));
+                prestador.setEndereco(rs.getString("endereco"));
+                prestador.setDescricao(rs.getString("descricao"));
+                prestador.setData_criacao(rs.getTimestamp("data_criacao"));
+                prestador.setEmail(rs.getString("email"));
+                prestador.setSenha(rs.getString("senha"));
+                lista.add(prestador);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+	
+	public List<Prestador> listarPrestadores(Connection conn) {
+        List<Prestador> prestadores = new ArrayList<>();
+        String sql = "SELECT * FROM Prestador";
+        
+        try (PreparedStatement stmt = conn.prepareStatement(sql);) {
+            
+        	ResultSet rs = stmt.executeQuery();
+        	
+            while (rs.next()) {
+                Prestador prestador = new Prestador();
+                prestador.setId_prestador(rs.getInt("id_prestador"));
+                prestador.setNome_fantasia(rs.getString("nome_fantasia"));
+                prestador.setNome_completo(rs.getString("nome_completo"));
+                prestador.setFoto_perfil(rs.getString("foto_perfil"));
+                prestador.setEndereco(rs.getString("endereco"));
+                prestador.setDescricao(rs.getString("descricao"));
+                prestador.setData_criacao(rs.getTimestamp("data_criacao"));
+                prestador.setEmail(rs.getString("email"));
+                prestador.setSenha(rs.getString("senha"));
+                
+                prestadores.add(prestador);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();   
+        }
+        
+        return prestadores;
+    }
 	
 }

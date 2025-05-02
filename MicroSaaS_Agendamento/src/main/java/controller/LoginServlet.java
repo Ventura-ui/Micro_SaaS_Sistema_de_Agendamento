@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
                 if (cliente != null) {
                     session.setAttribute("usuarioLogado", cliente);
                     session.setAttribute("tipoUsuario", "cliente");
-                    response.sendRedirect(request.getContextPath() + "/cliente/dashboardCliente.jsp");
+                    response.sendRedirect("/MicroSaaS_Agendamento/dashboardCliente");
                     return;
                 }
             } else if ("prestador".equals(tipoUsuario)) {

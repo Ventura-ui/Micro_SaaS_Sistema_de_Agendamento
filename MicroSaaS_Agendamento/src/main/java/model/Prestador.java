@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Prestador {
 	
@@ -13,6 +14,7 @@ public class Prestador {
 	private Timestamp data_criacao;
 	private String email;
 	private String senha;
+	private List<String> imagens;
 	
 	public Prestador() {}
 
@@ -99,5 +101,13 @@ public class Prestador {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public List<String> getImagens() {
+	    return imagens;
+	}
+
+	public void setImagens(List<String> imagens) {
+	    this.imagens = imagens;
 	}
 }

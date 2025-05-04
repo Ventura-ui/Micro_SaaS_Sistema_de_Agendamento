@@ -11,15 +11,13 @@ import model.Disponibilidade;
 public class DisponibilidadeDAO {
 	
 	public void inserirOuAtualizar(Connection conn ,Disponibilidade d){
-		String sql = "INSERT INTO Disponibilidade (id_prestador, dia_semana, horario_inicio, horario_fim) " +
-	             "VALUES (?, ?, ?, ?) " +
-	             "ON DUPLICATE KEY UPDATE horario_inicio = VALUES(horario_inicio), horario_fim = VALUES(horario_fim)";
+		String sql = "INSERT INTO Disponibilidade (id_prestador, dia_semana, horario) " +
+	             "VALUES (?, ?, ?)";
 
 	    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 	        stmt.setInt(1, d.getIdPrestador());
 	        stmt.setInt(2, d.getDiaSemana());
-	        stmt.setTime(3, d.getHorarioInicio());
-	        stmt.setTime(4, d.getHorarioFim());
+	        stmt.setTime(3, d.getHorario());
 	        stmt.executeUpdate();
 	    }catch (Exception e) {
 			e.printStackTrace();
@@ -29,7 +27,7 @@ public class DisponibilidadeDAO {
 
     public List<Disponibilidade> listarPorPrestador(Connection conn, int idPrestador){
         List<Disponibilidade> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Disponibilidade WHERE id_prestador = ? ORDER BY dia_semana, horario_inicio";
+        String sql = "SELECT * FROM Disponibilidade WHERE id_prestador = ? ORDER BY dia_semana, horario";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             
@@ -40,8 +38,7 @@ public class DisponibilidadeDAO {
                     d.setIdDisponibilidade(rs.getInt("id_disponibilidade"));
                     d.setIdPrestador(rs.getInt("id_prestador"));
                     d.setDiaSemana(rs.getInt("dia_semana"));
-                    d.setHorarioInicio(rs.getTime("horario_inicio"));
-                    d.setHorarioFim(rs.getTime("horario_fim"));
+                    d.setHorario(rs.getTime("horario"));
                     lista.add(d);
                 }
             }

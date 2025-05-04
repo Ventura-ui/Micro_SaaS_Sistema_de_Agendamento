@@ -7,19 +7,18 @@ public class Disponibilidade {
 	private int idDisponibilidade;
     private int idPrestador;
     private int diaSemana;
-    private Time horarioInicio;
-    private Time horarioFim;
+    private Time horario;
     
     public Disponibilidade() {
 		
 	}
     
-	public Disponibilidade(int idDisponibilidade, int idPrestador, int diaSemana, Time horarioInicio, Time horarioFim) {
+	public Disponibilidade(int idDisponibilidade, int idPrestador, int diaSemana, Time horario) {
+		super();
 		this.idDisponibilidade = idDisponibilidade;
 		this.idPrestador = idPrestador;
 		this.diaSemana = diaSemana;
-		this.horarioInicio = horarioInicio;
-		this.horarioFim = horarioFim;
+		this.horario = horario;
 	}
 
 	public int getIdDisponibilidade() {
@@ -46,19 +45,11 @@ public class Disponibilidade {
 		this.diaSemana = diaSemana;
 	}
 
-	public Time getHorarioInicio() {
-		return horarioInicio;
+	public Time getHorario() {
+		return horario;
 	}
 
-	public void setHorarioInicio(Time horarioInicio) {
-		this.horarioInicio = horarioInicio;
-	}
-
-	public Time getHorarioFim() {
-		return horarioFim;
-	}
-
-	public void setHorarioFim(Time horarioFim) {
-		this.horarioFim = horarioFim;
+	public void setHorario(Time horario) {
+		this.horario = horario;
 	}
 }

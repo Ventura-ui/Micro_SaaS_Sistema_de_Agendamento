@@ -9,13 +9,13 @@
 <body>
 	<h2>Cadastrar horários</h2>
 
-	<form action="/MicroSaaS_Agendamento/CadastrarDisponibilidadeServlet" method="post">
+	<form action="/MicroSaaS_Agendamento/CadastrarDisponibilidadeServlet"
+		method="post">
 		<table border="1">
 			<thead>
 				<tr>
 					<th>Dia da Semana</th>
 					<th>Horário Início</th>
-					<th>Horário Fim</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,7 +31,6 @@
 								<c:when test="${i == 7}">Sábado</c:when>
 							</c:choose></td>
 						<td><input type="time" name="inicio_${i}" /></td>
-						<td><input type="time" name="fim_${i}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -39,11 +38,14 @@
 		<input type="hidden" name="idPrestador" value="${idPrestador}" />
 		<button type="submit">Salvar Disponibilidade</button>
 	</form>
-	
-	<c:if test="${not empty mensagem}">
-        <p>${mensagem}</p>
-    </c:if>
-    <br><br><br>
+
+	<c:if test="${not empty sessionScope.mensagem}">
+		<p>${sessionScope.mensagem}</p>
+		<c:remove var="mensagem" scope="session" />
+	</c:if>
+	<br>
+	<br>
+	<br>
 
 	<p>
 		<a href="dashboardPrestador.jsp">Voltar</a>

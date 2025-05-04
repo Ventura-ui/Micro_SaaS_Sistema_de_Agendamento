@@ -24,24 +24,22 @@ public class CadastrarDisponibilidadeServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Prestador prestador = (Prestador) request.getSession().getAttribute("usuarioLogado");
 		int idPrestador = prestador.getId_prestador();
-		boolean success = false;
+		int cadastradosComSucesso = 0;
 		
 		try {
 			DisponibilidadeDAO dao = new DisponibilidadeDAO();
 			Connection conn = ConnectionFactory.getConnection();
 			for (int dia = 1; dia <= 7; dia++) {
 		        String inicioStr = request.getParameter("inicio_" + dia);
-		        String fimStr = request.getParameter("fim_" + dia);
 
-		        if (inicioStr != null && fimStr != null && !inicioStr.isEmpty() && !fimStr.isEmpty()) {
+		        if (inicioStr != null && !inicioStr.isEmpty()) {
 		            try {
 		                Disponibilidade d = new Disponibilidade();
 		                d.setIdPrestador(idPrestador);
 		                d.setDiaSemana(dia);
-		                d.setHorarioInicio(Time.valueOf(inicioStr + ":00"));
-		                d.setHorarioFim(Time.valueOf(fimStr + ":00"));
+		                d.setHorario(Time.valueOf(inicioStr + ":00"));
 		                dao.inserirOuAtualizar(conn, d);
-		                success = true;
+		                cadastradosComSucesso++;
 		            } catch (Exception e) {
 		                e.printStackTrace();
 		            }
@@ -51,8 +49,8 @@ public class CadastrarDisponibilidadeServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		
-		String mensagem = success ? "Disponibilidade cadastrada com sucesso!" : "Não foi possível cadastrar seus horários!";
-	    request.setAttribute("mensagem", mensagem);
-	    request.getRequestDispatcher("/prestador/disponibilidade.jsp").forward(request, response);
+		String mensagem = (cadastradosComSucesso > 0) ? "Disponibilidade cadastrada com sucesso!" : "Não foi possível cadastrar seus horários!";
+		request.getSession().setAttribute("mensagem", mensagem);
+		response.sendRedirect(request.getContextPath() + "/prestador/disponibilidade.jsp");
 	}
 }

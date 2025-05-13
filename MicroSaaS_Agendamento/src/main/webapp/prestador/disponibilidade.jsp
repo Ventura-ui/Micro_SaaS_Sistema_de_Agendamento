@@ -16,6 +16,10 @@
 				<tr>
 					<th>Dia da Semana</th>
 					<th>Horário Início</th>
+					<th>Horário Fim</th>
+					<th>Horário de descanso Início</th>
+					<th>Horário de descanso Fim</th>
+					<th>Tempo de serviço</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,6 +35,10 @@
 								<c:when test="${i == 7}">Sábado</c:when>
 							</c:choose></td>
 						<td><input type="time" name="inicio_${i}" /></td>
+						<td><input type="time" name="fim_${i}" /></td>
+						<td><input type="time" name="descanso_inicio_${i}" /></td>
+						<td><input type="time" name="descanso_fim_${i}" /></td>
+						<td><input type="time" name="tempo_servico_${i}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>

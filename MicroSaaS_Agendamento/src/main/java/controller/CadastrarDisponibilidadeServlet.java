@@ -31,13 +31,21 @@ public class CadastrarDisponibilidadeServlet extends HttpServlet{
 			Connection conn = ConnectionFactory.getConnection();
 			for (int dia = 1; dia <= 7; dia++) {
 		        String inicioStr = request.getParameter("inicio_" + dia);
+		        String fimStr = request.getParameter("fim_" + dia);
+		        String descanso_inicioStr = request.getParameter("descanso_inicio_" + dia);
+		        String descanso_fimStr = request.getParameter("descanso_fim_" + dia);
+		        String tempo_servicoStr = request.getParameter("tempo_servico_" + dia);
 
 		        if (inicioStr != null && !inicioStr.isEmpty()) {
 		            try {
 		                Disponibilidade d = new Disponibilidade();
 		                d.setIdPrestador(idPrestador);
 		                d.setDiaSemana(dia);
-		                d.setHorario(Time.valueOf(inicioStr + ":00"));
+		                d.setHorario_inicio(Time.valueOf(inicioStr + ":00"));
+		                d.setHorario_fim(Time.valueOf(fimStr + ":00"));
+		                d.setHorario_descanso_inicio(Time.valueOf(descanso_inicioStr + ":00"));
+		                d.setHorario_descanso_fim(Time.valueOf(descanso_fimStr + ":00"));
+		                d.setTempo_servico(Time.valueOf(tempo_servicoStr + ":00"));
 		                dao.inserirOuAtualizar(conn, d);
 		                cadastradosComSucesso++;
 		            } catch (Exception e) {

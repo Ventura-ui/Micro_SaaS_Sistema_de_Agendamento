@@ -74,9 +74,9 @@ public class UploadPortfolioServlet extends HttpServlet{
 	    }
 	    
 	    String mensagem = salvouAlgumaImagem ? "Imagens enviadas com sucesso!" : "Nenhuma imagem válida foi enviada.";
-	    request.setAttribute("mensagem", mensagem);
-	    request.setAttribute("imagensSalvas", imagensSalvas); 
-	    request.getRequestDispatcher("/prestador/uploadPortfolio.jsp").forward(request, response);
+	    request.getSession().setAttribute("mensagem", mensagem);
+	    request.getSession().setAttribute("imagensSalvas", imagensSalvas); 
+	    response.sendRedirect(request.getContextPath() + "/prestador/uploadPortfolio.jsp");
 	}
 	
 }

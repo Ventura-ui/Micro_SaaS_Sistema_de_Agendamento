@@ -34,12 +34,14 @@ CREATE TABLE Disponibilidade (
     id_disponibilidade INT PRIMARY KEY AUTO_INCREMENT,
     id_prestador INT NOT NULL,
     dia_semana INT NOT NULL, 
-    horario TIME NOT NULL,
+    horario_inicio TIME NOT NULL,
+    horario_fim TIME NOT NULL,
+    horario_descanso_inicio TIME NOT NULL,
+    horario_descanso_fim TIME NOT NULL,
+    tempo_servico TIME NOT NULL,
     FOREIGN KEY (id_prestador) REFERENCES Prestador(id_prestador),
-    UNIQUE (id_prestador, dia_semana, horario)
+    UNIQUE (id_prestador, dia_semana, horario_inicio, horario_fim, horario_descanso_inicio, horario_descanso_fim, tempo_servico)
 );
-
-DROP TABLE Disponibilidade;
 
 CREATE TABLE Agendamento (
     id_agendamento INT PRIMARY KEY AUTO_INCREMENT,

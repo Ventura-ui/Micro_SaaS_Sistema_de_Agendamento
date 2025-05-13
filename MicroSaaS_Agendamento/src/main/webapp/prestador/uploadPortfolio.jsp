@@ -14,9 +14,10 @@
         <input type="submit" value="Enviar" />
     </form>
 
-    <c:if test="${not empty mensagem}">
-        <p>${mensagem}</p>
-    </c:if>
+    <c:if test="${not empty sessionScope.mensagem}">
+		<p>${sessionScope.mensagem}</p>
+		<c:remove var="mensagem" scope="session" />
+	</c:if>
     
     <br><br><br>
     

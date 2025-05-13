@@ -56,5 +56,29 @@ public class DisponibilidadeDAO {
         
         return lista;
     }
+    
+    public Disponibilidade buscarPorPrestadorEDia(Connection conn, int idPrestador, int diaSemana) {
+    	String sql = "SELECT * FROM Disponibilidade WHERE id_prestador = ? AND dia_semana = ?";
+    	
+        try (PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.setInt(1, idPrestador);
+            stmt.setInt(2, diaSemana);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Disponibilidade d = new Disponibilidade();
+                d.setHorario_inicio(rs.getTime("horario_inicio"));
+                d.setHorario_fim(rs.getTime("horario_fim"));
+                d.setHorario_descanso_inicio(rs.getTime("horario_descanso_inicio"));
+                d.setHorario_descanso_fim(rs.getTime("horario_descanso_fim"));
+                d.setTempo_servico(rs.getTime("tempo_servico"));
+                return d;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 	
 }

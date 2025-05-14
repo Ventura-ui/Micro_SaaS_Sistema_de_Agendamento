@@ -104,5 +104,15 @@ public class AgendamentoDAO {
 
 		return lista;
 	}
-
+	
+	public void atualizarStatus(Connection conn, int idAgendamento, StatusAgendamento novoStatus) {
+	    String sql = "UPDATE Agendamento SET status = ? WHERE id_agendamento = ?";
+	    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        stmt.setString(1, novoStatus.name());
+	        stmt.setInt(2, idAgendamento);
+	        stmt.executeUpdate();
+	    }catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

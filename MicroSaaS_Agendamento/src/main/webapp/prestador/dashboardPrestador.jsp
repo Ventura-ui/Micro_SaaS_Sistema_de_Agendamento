@@ -15,7 +15,7 @@
 	
 	<p><a href="disponibilidade.jsp">Cadastrar Horários</a></p>
 	<p><a href="uploadPortfolio.jsp">Adicionar fotos ao portifólio</a></p>
-	<p><a href="/MicroSaaS_Agendamento/ListarAgendamentosServlet">Cadastrar Horários</a></p>
+	<p><a href="/MicroSaaS_Agendamento/ListarAgendamentosServlet">Ver agendamentos</a></p>
 	<p><a href="/MicroSaaS_Agendamento/LogoutServlet">Fazer Logout</a></p>
 
 </body>

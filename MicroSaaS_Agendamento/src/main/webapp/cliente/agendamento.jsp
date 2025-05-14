@@ -34,7 +34,7 @@
 		Horários disponíveis para
 		<%=dataSelecionada%>:
 	</h3>
-	<form method="post" action="AgendarServicoServlet">
+	<form method="post" action="agendamentoServlet">
 		<input type="hidden" name="id_prestador" value="<%=idPrestador%>" />
 		<input type="hidden" name="data_agendamento"
 			value="<%=dataSelecionada%>" /> <select name="hora_agendamento"
@@ -56,5 +56,12 @@
 	<%
 	}
 	%>
+	
+	<c:if test="${not empty mensagem}">
+        <p style="color:blue;">${mensagem}</p>
+    </c:if>
+	
+	<br><br><hr><br><br>
+	<p><a href="/MicroSaaS_Agendamento/dashboardCliente">Voltar</a></p>
 </body>
 </html>

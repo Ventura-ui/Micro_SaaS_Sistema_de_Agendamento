@@ -68,7 +68,7 @@
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">${p.nome_fantasia}- Portfólio</h5>
+							<h5 class="modal-title">${p.nome_fantasia}-Portfólio</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 						</div>
 						<div class="modal-body">
@@ -104,7 +104,8 @@
 						</div>
 						<div class="modal-footer">
 							<form method="post" action="agendamento.jsp">
-								<input type="hidden" name="id_prestador" value="${p.id_prestador}" />
+								<input type="hidden" name="id_prestador"
+									value="${p.id_prestador}" />
 								<button type="submit" class="btn btn-success">Agendar</button>
 							</form>
 							<button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -114,6 +115,28 @@
 			</div>
 		</c:forEach>
 	</div>
+
+	<p class="text-center mt-4">
+		<c:choose>
+			<c:when test="${pagina > 0}">
+				<a class="btn btn-secondary me-2"
+					href="/MicroSaaS_Agendamento/dashboardCliente?pagina=${pagina - 1}">Anterior</a>
+			</c:when>
+			<c:otherwise>
+				<span class="btn btn-secondary disabled me-2">Anterior</span>
+			</c:otherwise>
+		</c:choose>
+
+		<c:choose>
+			<c:when test="${pagina < totalPaginas - 1}">
+				<a class="btn btn-secondary"
+					href="/MicroSaaS_Agendamento/dashboardCliente?pagina=${pagina + 1}">Próximo</a>
+			</c:when>
+			<c:otherwise>
+				<span class="btn btn-secondary disabled">Próximo</span>
+			</c:otherwise>
+		</c:choose>
+	</p>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

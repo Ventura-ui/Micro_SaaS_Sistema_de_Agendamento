@@ -10,6 +10,8 @@ import model.Agendamento;
 import model.Enum.StatusAgendamento;
 
 public class AgendamentoDAO {
+	
+	private int chamadosPorPagina = 6;
 
 	public void inserirAgendamento(Connection conn, Agendamento a) throws Exception {
 		String sql = "INSERT INTO Agendamento (id_cliente, id_prestador, data_agendamento, hora_agendamento, status) "
@@ -45,14 +47,43 @@ public class AgendamentoDAO {
 			}
 		}
 	}
+	
+	public Agendamento buscarPorID(Connection conn, int idAgendamento) {
+		Agendamento a = new Agendamento();
+		String sql = "SELECT * FROM Agendamento WHERE id_agendamento = ?";
 
-	public List<Agendamento> listarPorPrestador(Connection conn, int idPrestador) {
+		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+			stmt.setInt(1, idAgendamento);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					a.setIdAgendamento(rs.getInt("id_agendamento"));
+					a.setIdCliente(rs.getInt("id_cliente"));
+					a.setIdPrestador(rs.getInt("id_prestador"));
+					a.setData(rs.getDate("data_agendamento").toLocalDate());
+	                a.setHorario(rs.getTime("hora_agendamento").toLocalTime());
+
+					String statusStr = rs.getString("status");
+					a.setStatus(StatusAgendamento.valueOf(statusStr));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return a;
+	}
+
+	public List<Agendamento> listarPorPrestador(Connection conn, int idPrestador, int pagina) {
 		List<Agendamento> lista = new ArrayList<>();
-		String sql = "SELECT * FROM Agendamento WHERE id_prestador = ? ORDER BY data_agendamento, hora_agendamento";
+		String sql = "SELECT * FROM Agendamento WHERE id_prestador = ? ORDER BY data_agendamento, hora_agendamento "
+				+ "LIMIT ? OFFSET ?";
 
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 
 			stmt.setInt(1, idPrestador);
+			stmt.setInt(2, chamadosPorPagina);
+			stmt.setInt(3, chamadosPorPagina * pagina);
 			try (ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
 					Agendamento a = new Agendamento();
@@ -75,14 +106,17 @@ public class AgendamentoDAO {
 		return lista;
 	}
 	
-	public List<Agendamento> listarPorPrestadorEStatus(Connection conn, int idPrestador, StatusAgendamento status) {
+	public List<Agendamento> listarPorPrestadorEStatus(Connection conn, int idPrestador, StatusAgendamento status, int pagina) {
 		List<Agendamento> lista = new ArrayList<>();
-		String sql = "SELECT * FROM Agendamento WHERE id_prestador = ? AND status = ? ORDER BY data_agendamento, hora_agendamento";
+		String sql = "SELECT * FROM Agendamento WHERE id_prestador = ? AND status = ? ORDER BY data_agendamento, hora_agendamento "
+				+ "LIMIT ? OFFSET ?";
 
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 
 			stmt.setInt(1, idPrestador);
 			stmt.setString(2, status.name());
+			stmt.setInt(3, chamadosPorPagina);
+			stmt.setInt(4, chamadosPorPagina * pagina);
 			try (ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
 					Agendamento a = new Agendamento();
@@ -114,5 +148,35 @@ public class AgendamentoDAO {
 	    }catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int getTotalPaginas(Connection conn) {
+		int totalPaginas = 0;
+		String sql = "SELECT COUNT(id_agendamento) AS totalChamados FROM Agendamento";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			totalPaginas = rs.getInt("totalChamados");
+			totalPaginas = (int) Math.ceil((double) totalPaginas / chamadosPorPagina);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalPaginas;
+	}
+	
+	public int getTotalPaginasPorStatus(Connection conn, StatusAgendamento status) {
+		int totalPaginas = 0;
+		String sql = "SELECT COUNT(id_agendamento) AS totalChamados FROM Agendamento WHERE status LIKE ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			totalPaginas = rs.getInt("totalChamados");
+			totalPaginas = (int) Math.ceil((double) totalPaginas / chamadosPorPagina);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return totalPaginas;
 	}
 }

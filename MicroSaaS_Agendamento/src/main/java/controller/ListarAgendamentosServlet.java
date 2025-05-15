@@ -27,6 +27,14 @@ public class ListarAgendamentosServlet extends HttpServlet{
 		Prestador prestador = (Prestador) sessao.getAttribute("usuarioLogado");
 		String statusParam = request.getParameter("status");
 		
+		int pagina = 0;
+	    int totalPaginas = 0;
+		
+	    String paginaStr = request.getParameter("pagina");
+	    if (paginaStr != null){
+	    	pagina = Integer.parseInt(request.getParameter("pagina"));
+	    }
+	    
 		StatusAgendamento status = null;
 		if (statusParam != null && !statusParam.isEmpty()) {
 	        status = StatusAgendamento.valueOf(statusParam);
@@ -37,15 +45,21 @@ public class ListarAgendamentosServlet extends HttpServlet{
 			AgendamentoDAO dao = new AgendamentoDAO();
 			
 			if(status == null) {
-				List<Agendamento> lista = dao.listarPorPrestador(conn, prestador.getId_prestador());
-		        request.setAttribute("agendamentos", lista);
-		        request.setAttribute("statusSelecionado", statusParam);
-		        request.getRequestDispatcher("/prestador/agenda.jsp").forward(request, response);
+				List<Agendamento> lista = dao.listarPorPrestador(conn, prestador.getId_prestador(), pagina);
+				totalPaginas = dao.getTotalPaginas(conn);
+		        request.getSession().setAttribute("agendamentos", lista);
+		        request.getSession().setAttribute("pagina", pagina);
+			    request.getSession().setAttribute("totalPaginas", totalPaginas);
+		        request.getSession().setAttribute("statusSelecionado", statusParam);
+		        response.sendRedirect(request.getContextPath() + "/prestador/agenda.jsp");
 			}else {
-				List<Agendamento> lista = dao.listarPorPrestadorEStatus(conn, prestador.getId_prestador(), status);
-		        request.setAttribute("agendamentos", lista);
-		        request.setAttribute("statusSelecionado", statusParam);
-		        request.getRequestDispatcher("/prestador/agenda.jsp").forward(request, response);
+				List<Agendamento> lista = dao.listarPorPrestadorEStatus(conn, prestador.getId_prestador(), status, pagina);
+				totalPaginas = dao.getTotalPaginasPorStatus(conn, status);
+				request.getSession().setAttribute("agendamentos", lista);
+		        request.getSession().setAttribute("pagina", pagina);
+			    request.getSession().setAttribute("totalPaginas", totalPaginas);
+		        request.getSession().setAttribute("statusSelecionado", statusParam);
+		        response.sendRedirect(request.getContextPath() + "/prestador/agenda.jsp");
 			}
 			
 		} catch (Exception e) {

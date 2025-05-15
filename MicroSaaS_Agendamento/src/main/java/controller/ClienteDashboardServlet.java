@@ -26,14 +26,25 @@ public class ClienteDashboardServlet extends HttpServlet{
 	    Connection conn = null;
 	    List<Prestador> prestadores = null;
 	    
+	    int pagina = 0;
+	    int totalPaginas = 0;
+	    
+	    String paginaStr = request.getParameter("pagina");
+	    if (paginaStr != null){
+	    	pagina = Integer.parseInt(request.getParameter("pagina"));
+	    }
+
+	    
 	    try {
 	        conn = ConnectionFactory.getConnection();
 	       
 	        
 	        if (cidade != null && !cidade.isEmpty()) {
-	            prestadores = dao.buscarPorCidade(conn, cidade);
+	            prestadores = dao.buscarPorCidade(conn, cidade, pagina);
+	            totalPaginas = dao.getTotalPaginasPorCidade(conn, cidade);
 	        } else {
-	            prestadores = dao.listarPrestadores(conn);
+	            prestadores = dao.listarPrestadores(conn, pagina);
+	            totalPaginas = dao.getTotalPaginas(conn);
 	        }
 	        
 	        for (Prestador prestador : prestadores) {
@@ -50,6 +61,8 @@ public class ClienteDashboardServlet extends HttpServlet{
 	        request.getRequestDispatcher("/erro.jsp").forward(request, response);
 	    }
 	    
+	    request.getSession().setAttribute("pagina", pagina);
+	    request.getSession().setAttribute("totalPaginas", totalPaginas);
 	    request.getSession().setAttribute("prestadores", prestadores);
 	    response.sendRedirect(request.getContextPath() + "/cliente/dashboardCliente.jsp");
 	}

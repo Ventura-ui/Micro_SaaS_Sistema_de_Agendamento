@@ -22,7 +22,10 @@ import model.Prestador;
 import utils.ConnectionFactory;
 
 @WebServlet("/cadastroPrestador")
-@MultipartConfig
+@MultipartConfig(
+fileSizeThreshold = 1024 * 1024,
+maxFileSize = 5 * 1024 * 1024,
+maxRequestSize = 25 * 1024 * 1024)
 public class CadastroPrestadorServlet extends HttpServlet{
 	
 	List<String> tiposPermitidos = Arrays.asList("image/png", "image/jpeg");

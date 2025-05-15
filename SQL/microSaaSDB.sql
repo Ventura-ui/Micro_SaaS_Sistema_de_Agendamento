@@ -68,6 +68,7 @@ SELECT * FROM Cliente;
 SELECT * FROM Prestador;
 SELECT * FROM Imagem_Portfolio;
 SELECT * FROM Disponibilidade;
+SELECT * FROM Agendamento;
 SHOW CREATE TABLE Prestador;
 
 

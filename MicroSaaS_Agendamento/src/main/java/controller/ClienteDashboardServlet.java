@@ -64,6 +64,7 @@ public class ClienteDashboardServlet extends HttpServlet{
 	    request.getSession().setAttribute("pagina", pagina);
 	    request.getSession().setAttribute("totalPaginas", totalPaginas);
 	    request.getSession().setAttribute("prestadores", prestadores);
+	    request.getSession().setAttribute("cidadeSelecionada", cidade);
 	    response.sendRedirect(request.getContextPath() + "/cliente/dashboardCliente.jsp");
 	}
 }

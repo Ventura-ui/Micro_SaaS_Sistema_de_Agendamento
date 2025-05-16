@@ -21,9 +21,9 @@
 		<label for="cidade">Filtrar por cidade:</label> <select name="cidade"
 			id="cidade" class="form-select w-25 d-inline-block">
 			<option value="">Todas</option>
-			<option value="Araraquara">Araraquara</option>
-			<option value="São Carlos">São Carlos</option>
-			<option value="Matão">Matão</option>
+			<option value="Araraquara" ${cidadeSelecionada == 'Araraquara' ? 'selected' : ''}>Araraquara</option>
+			<option value="São Carlos" ${cidadeSelecionada == 'São Carlos' ? 'selected' : ''}>São Carlos</option>
+			<option value="Matão" ${cidadeSelecionada == 'Matão' ? 'selected' : ''}>Matão</option>
 		</select>
 		<button type="submit" class="btn btn-primary">Filtrar</button>
 	</form>
@@ -120,7 +120,7 @@
 		<c:choose>
 			<c:when test="${pagina > 0}">
 				<a class="btn btn-secondary me-2"
-					href="/MicroSaaS_Agendamento/dashboardCliente?pagina=${pagina - 1}">Anterior</a>
+   					href="/MicroSaaS_Agendamento/dashboardCliente?pagina=${pagina - 1}&cidade=${cidadeSelecionada}">Anterior</a>
 			</c:when>
 			<c:otherwise>
 				<span class="btn btn-secondary disabled me-2">Anterior</span>
@@ -130,7 +130,7 @@
 		<c:choose>
 			<c:when test="${pagina < totalPaginas - 1}">
 				<a class="btn btn-secondary"
-					href="/MicroSaaS_Agendamento/dashboardCliente?pagina=${pagina + 1}">Próximo</a>
+  		 			href="/MicroSaaS_Agendamento/dashboardCliente?pagina=${pagina + 1}&cidade=${cidadeSelecionada}">Próximo</a>
 			</c:when>
 			<c:otherwise>
 				<span class="btn btn-secondary disabled">Próximo</span>

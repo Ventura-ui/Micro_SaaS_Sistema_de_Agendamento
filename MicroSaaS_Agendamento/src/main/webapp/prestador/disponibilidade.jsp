@@ -34,13 +34,13 @@
                                 <tr>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${i == 1}">Domingo</c:when>
-                                            <c:when test="${i == 2}">Segunda</c:when>
-                                            <c:when test="${i == 3}">Terça</c:when>
-                                            <c:when test="${i == 4}">Quarta</c:when>
-                                            <c:when test="${i == 5}">Quinta</c:when>
-                                            <c:when test="${i == 6}">Sexta</c:when>
-                                            <c:when test="${i == 7}">Sábado</c:when>
+                                            <c:when test="${i == 1}">Segunda</c:when>
+                                            <c:when test="${i == 2}">Terça</c:when>
+                                            <c:when test="${i == 3}">Quarta</c:when>
+                                            <c:when test="${i == 4}">Quinta</c:when>
+                                            <c:when test="${i == 5}">Sexta</c:when>
+                                            <c:when test="${i == 6}">Sábado</c:when>
+                                            <c:when test="${i == 7}">Domingo</c:when>
                                         </c:choose>
                                     </td>
                                     <td><input type="time" class="form-control" name="inicio_${i}" /></td>

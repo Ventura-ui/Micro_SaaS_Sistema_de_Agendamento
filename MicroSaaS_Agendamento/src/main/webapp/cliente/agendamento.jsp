@@ -4,7 +4,7 @@
 <%
 	int idPrestador = Integer.parseInt(request.getParameter("id_prestador"));
 	request.setAttribute("id_prestador", idPrestador);
-	
+
 	List<String> horariosDisponiveis = (List<String>) request.getAttribute("horariosDisponiveis");
 	String dataSelecionada = (String) request.getAttribute("dataSelecionada");
 %>
@@ -12,56 +12,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Agendamento</title>
+    <meta charset="UTF-8">
+    <title>Agendamento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-	<h2>Agendar um horário</h2>
+<body class="bg-light">
 
-	<form method="get" action="/MicroSaaS_Agendamento/buscarHorariosDisponiveis">
-		<input type="hidden" name="id_prestador" value="<%=idPrestador%>" />
-		<label for="data_agendamento">Escolha uma data:</label> <input
-			type="date" name="data_agendamento" required />
-		<button type="submit">Ver Horários</button>
-	</form>
+<div class="container mt-5">
+    <h2 class="mb-4 text-primary">Agendar um horário</h2>
 
-	<hr />
+    <form method="get" action="/MicroSaaS_Agendamento/buscarHorariosDisponiveis" class="mb-4">
+        <input type="hidden" name="id_prestador" value="<%=idPrestador%>" />
+        <div class="mb-3">
+            <label for="data_agendamento" class="form-label">Escolha uma data:</label>
+            <input type="date" name="data_agendamento" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Ver Horários</button>
+    </form>
 
-	<%
-	if (horariosDisponiveis != null && !horariosDisponiveis.isEmpty()) {
-	%>
-	<h3>
-		Horários disponíveis para
-		<%=dataSelecionada%>:
-	</h3>
-	<form method="post" action="agendamentoServlet">
-		<input type="hidden" name="id_prestador" value="<%=idPrestador%>" />
-		<input type="hidden" name="data_agendamento"
-			value="<%=dataSelecionada%>" /> <select name="hora_agendamento"
-			required>
-			<%
-			for (String hora : horariosDisponiveis) {
-			%>
-			<option value="<%=hora%>"><%=hora%></option>
-			<%
-			}
-			%>
-		</select>
-		<button type="submit">Confirmar Agendamento</button>
-	</form>
-	<%
-	} else if (dataSelecionada != null) {
-	%>
-	<p>Nenhum horário disponível para esta data.</p>
-	<%
-	}
-	%>
-	
-	<c:if test="${not empty mensagem}">
-        <p style="color:blue;">${mensagem}</p>
+    <hr />
+
+    <%
+    if (horariosDisponiveis != null && !horariosDisponiveis.isEmpty()) {
+    %>
+    <h4 class="text-success mb-3">
+        Horários disponíveis para <%=dataSelecionada%>:
+    </h4>
+    <form method="post" action="agendamentoServlet" class="mb-4">
+        <input type="hidden" name="id_prestador" value="<%=idPrestador%>" />
+        <input type="hidden" name="data_agendamento" value="<%=dataSelecionada%>" />
+        <div class="mb-3">
+            <label for="hora_agendamento" class="form-label">Selecione o horário:</label>
+            <select name="hora_agendamento" class="form-select" required>
+                <%
+                for (String hora : horariosDisponiveis) {
+                %>
+                <option value="<%=hora%>"><%=hora%></option>
+                <%
+                }
+                %>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Confirmar Agendamento</button>
+    </form>
+    <%
+    } else if (dataSelecionada != null) {
+    %>
+    <div class="alert alert-warning">Nenhum horário disponível para esta data.</div>
+    <%
+    }
+    %>
+
+    <c:if test="${not empty mensagem}">
+        <div class="alert alert-info">${mensagem}</div>
     </c:if>
-	
-	<br><br><hr><br><br>
-	<p><a href="/MicroSaaS_Agendamento/dashboardCliente">Voltar</a></p>
+
+    <hr class="mt-5" />
+    <a href="/MicroSaaS_Agendamento/dashboardCliente" class="btn btn-secondary mt-2">Voltar</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

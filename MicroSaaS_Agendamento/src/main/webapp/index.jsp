@@ -12,14 +12,16 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
 	rel="stylesheet">
-<link href="css/estilo.css" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/css/estilo.css" rel="stylesheet"> <%-- Caminho corrigido aqui --%>
 </head>
 <body>
 
 	<div class="overlay"></div>
 
 	<div class="container mt-5 shadow-lg rounded">
-		<h1 class="mb-4">TopBarber</h1>
+        <div class="text-center mb-4">
+            <img src="<%= request.getContextPath() %>/imagens/TopBarber.png" alt="TopBarber Logo" class="img-fluid" style="max-height: 150px;">
+        </div>
 		<p class="text-center text-light mb-4">Sua barbearia moderna,
 			agora online.</p>
 

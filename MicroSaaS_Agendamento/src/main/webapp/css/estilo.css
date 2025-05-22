@@ -1,0 +1,237 @@
+body {
+    background-color: #121212;
+    font-family: 'Roboto', sans-serif;
+    background-image: url('https://images.unsplash.com/photo-1619675778997-0773db4e00de?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+    color: #ffffff;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.7);
+    z-index: -1;
+}
+
+.container {
+    background-color: rgba(28, 28, 30, 0.95);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    color: #e0e0e0;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    max-width: 800px;
+}
+
+h1 {
+    color: #f5f5f5;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+a {
+    color: #4dabf7;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #74c0fc;
+}
+
+.container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container p.small, .container p.text-muted {
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #999 !important;
+}
+
+p {
+    color: #cccccc;
+}
+
+.btn {
+    font-weight: 600;
+    padding: 14px 25px;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 10px auto;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1rem;
+}
+
+
+.btn-pagination {
+    width: auto; 
+    display: inline-block; 
+    margin: 5px; 
+    padding: 10px 20px; 
+    max-width: none;
+}
+
+.btn-primary {
+    background-color: #0f3460;
+    border-color: #0f3460;
+}
+
+.btn-primary:hover {
+    background-color: #1a508b;
+    border-color: #1a508b;
+    transform: translateY(-3px);
+}
+
+.btn-success {
+    background-color: #14532d;
+    border-color: #14532d;
+}
+
+.btn-success:hover {
+    background-color: #1e773d;
+    border-color: #1e773d;
+    transform: translateY(-3px);
+}
+
+.btn-warning {
+    background-color: #b3541e;
+    border-color: #b3541e;
+    color: #fff;
+}
+
+.btn-warning:hover {
+    background-color: #e2703a;
+    border-color: #e2703a;
+    transform: translateY(-3px);
+}
+
+hr {
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    margin: 30px 0;
+}
+
+.form-control, .form-select {
+    background-color: rgba(40, 40, 40, 0.8);
+    border: 1px solid #444;
+    color: #fff;
+    padding: 12px 15px;
+    border-radius: 8px;
+}
+
+.modal-footer .btn {
+    width: auto; 
+    display: inline-block; 
+    margin: 5px;
+    max-width: none;
+}
+
+.modal-footer {
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap; 
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem; 
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: rgba(50, 50, 50, 0.9);
+    border-color: #0f3460;
+    color: #fff;
+    box-shadow: 0 0 0 0.25rem rgba(15, 52, 96, 0.25);
+}
+
+.form-label {
+    color: gray;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.card {
+    background-color: rgba(28, 28, 30, 0.95); 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    color: #e0e0e0; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); 
+    cursor: pointer;
+}
+
+.card-title {
+    color: #f5f5f5;
+    font-weight: 700;
+}
+
+.card-text {
+    color: #cccccc; 
+}
+
+.modal-content {
+    background-color: rgba(28, 28, 30, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e0e0; 
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f5f5f5; 
+
+.modal-title {
+    color: #f5f5f5; 
+}
+
+.modal-body {
+    color: #cccccc; 
+}
+
+.btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.btn-close:hover {
+    filter: invert(1) grayscale(100%) brightness(150%);
+}
+
+.table {
+    color: #e0e0e0; 
+    background-color: rgba(28, 28, 30, 0.95);
+    border-color: rgba(255, 255, 255, 0.1); 
+}
+
+.table th,
+.table td {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(40, 40, 40, 0.8);
+}
+
+.table-dark {
+    --bs-table-bg: rgba(18, 18, 18, 0.8); 
+    --bs-table-color: #f5f5f5;
+    --bs-table-border-color: rgba(255, 255, 255, 0.15);
+}

@@ -8,19 +8,21 @@
     <title>Disponibilidade</title>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/css/estilo.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body>
 
-<div class="container mt-5">
-    <div class="card shadow-sm">
-        <div class="card-body">
+<div class="overlay"></div>
+
+<div class="container mt-5 shadow-lg rounded">
+    <div class="card bg-transparent border-0"> <div class="card-body">
             <h2 class="card-title text-center mb-4">Cadastrar Horários de Disponibilidade</h2>
 
             <form action="/MicroSaaS_Agendamento/CadastrarDisponibilidadeServlet" method="post">
                 <div class="table-responsive">
                     <table class="table table-bordered align-middle text-center">
-                        <thead class="table-light">
-                            <tr>
+                        <thead class="table-dark"> <tr>
                                 <th>Dia da Semana</th>
                                 <th>Início</th>
                                 <th>Fim</th>
@@ -67,10 +69,11 @@
             </c:if>
 
             <div class="text-center mt-4">
-                <a href="dashboardPrestador.jsp" class="btn btn-outline-secondary">Voltar</a>
+                <a href="dashboardPrestador.jsp" class="btn btn-secondary">Voltar</a>
             </div>
         </div>
     </div>
+    <p class="text-center text-muted mt-4 small">© 2025 TopBarber - Todos os direitos reservados</p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -26,8 +26,7 @@ public class SessionFilter implements Filter{
 			chain.doFilter(httpRequest, response);
 		}else {
 			request.setAttribute("erro", "Não é possível acessar essa página sem estar logado!");
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginServlet");
 			dispatcher.forward(request, response);
 		}
 	}

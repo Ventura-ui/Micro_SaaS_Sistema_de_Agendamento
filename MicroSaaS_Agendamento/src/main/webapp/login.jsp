@@ -8,8 +8,10 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="css/estilo.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body>
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
@@ -40,6 +42,8 @@
                 <div class="alert alert-danger mt-3 text-center">${erro}</div>
             </c:if>
         </form>
+
+        <p class="text-center text-muted mt-3 mb-0" style="font-size: 0.9rem;">© 2025 TopBarber - Todos os direitos reservados</p>
     </div>
 </div>
 

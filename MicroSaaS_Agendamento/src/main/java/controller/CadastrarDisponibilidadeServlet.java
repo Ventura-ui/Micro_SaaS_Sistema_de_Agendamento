@@ -34,22 +34,26 @@ public class CadastrarDisponibilidadeServlet extends HttpServlet{
 			DisponibilidadeDAO dao = new DisponibilidadeDAO();
 			Connection conn = ConnectionFactory.getConnection();
 			for (int dia = 1; dia <= 7; dia++) {
-		        String inicioStr = request.getParameter("inicio_" + dia);
-		        String fimStr = request.getParameter("fim_" + dia);
-		        String descanso_inicioStr = request.getParameter("descanso_inicio_" + dia);
-		        String descanso_fimStr = request.getParameter("descanso_fim_" + dia);
-		        String tempo_servicoStr = request.getParameter("tempo_servico_" + dia);
-		        
-		        LocalTime inicio = LocalTime.parse(inicioStr, formatter);
-		        LocalTime fim = LocalTime.parse(fimStr, formatter);
-		        LocalTime descansoInicio = LocalTime.parse(descanso_inicioStr, formatter);
-		        LocalTime descansoFim = LocalTime.parse(descanso_fimStr, formatter);
+			    String inicioStr = request.getParameter("inicio_" + dia);
+			    String fimStr = request.getParameter("fim_" + dia);
+			    String descanso_inicioStr = request.getParameter("descanso_inicio_" + dia);
+			    String descanso_fimStr = request.getParameter("descanso_fim_" + dia);
+			    String tempo_servicoStr = request.getParameter("tempo_servico_" + dia);
 
+			    if (inicioStr != null && !inicioStr.isEmpty()
+			            && fimStr != null && !fimStr.isEmpty()
+			            && descanso_inicioStr != null && !descanso_inicioStr.isEmpty()
+			            && descanso_fimStr != null && !descanso_fimStr.isEmpty()
+			            && tempo_servicoStr != null && !tempo_servicoStr.isEmpty()) {
 
-		        if (inicioStr != null && !inicioStr.isEmpty()) {
-		            try {
-		            	if (inicio.isBefore(fim) && descansoInicio.isBefore(descansoFim)) {
-		            		Disponibilidade d = new Disponibilidade();
+			        try {
+			            LocalTime inicio = LocalTime.parse(inicioStr, formatter);
+			            LocalTime fim = LocalTime.parse(fimStr, formatter);
+			            LocalTime descansoInicio = LocalTime.parse(descanso_inicioStr, formatter);
+			            LocalTime descansoFim = LocalTime.parse(descanso_fimStr, formatter);
+
+			            if (inicio.isBefore(fim) && descansoInicio.isBefore(descansoFim)) {
+			                Disponibilidade d = new Disponibilidade();
 			                d.setIdPrestador(idPrestador);
 			                d.setDiaSemana(dia);
 			                d.setHorario_inicio(Time.valueOf(inicioStr + ":00"));
@@ -59,11 +63,11 @@ public class CadastrarDisponibilidadeServlet extends HttpServlet{
 			                d.setTempo_servico(Time.valueOf(tempo_servicoStr + ":00"));
 			                dao.inserirOuAtualizar(conn, d);
 			                cadastradosComSucesso++;
-		            	} 
-		            } catch (Exception e) {
-		                e.printStackTrace();
-		            }
-		        }
+			            }
+			        } catch (Exception e) {
+			            e.printStackTrace();
+			        }
+			    }
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

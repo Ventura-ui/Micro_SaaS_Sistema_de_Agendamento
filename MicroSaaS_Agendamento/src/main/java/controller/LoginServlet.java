@@ -28,6 +28,11 @@ public class LoginServlet extends HttpServlet {
         clienteDAO = new ClienteDAO();
         prestadorDAO = new PrestadorDAO();
     }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

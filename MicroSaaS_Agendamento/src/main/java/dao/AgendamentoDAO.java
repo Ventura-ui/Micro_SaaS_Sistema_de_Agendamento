@@ -106,6 +106,38 @@ public class AgendamentoDAO {
 		return lista;
 	}
 	
+	public List<Agendamento> listarPorCliente(Connection conn, int idCliente, int pagina) {
+		List<Agendamento> lista = new ArrayList<>();
+		String sql = "SELECT * FROM Agendamento WHERE id_cliente = ? ORDER BY data_agendamento, hora_agendamento "
+				+ "LIMIT ? OFFSET ?";
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+			stmt.setInt(1, idCliente);
+			stmt.setInt(2, chamadosPorPagina);
+			stmt.setInt(3, chamadosPorPagina * pagina);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					Agendamento a = new Agendamento();
+					a.setIdAgendamento(rs.getInt("id_agendamento"));
+					a.setIdCliente(rs.getInt("id_cliente"));
+					a.setIdPrestador(rs.getInt("id_prestador"));
+					a.setData(rs.getDate("data_agendamento").toLocalDate());
+	                a.setHorario(rs.getTime("hora_agendamento").toLocalTime());
+
+					String statusStr = rs.getString("status");
+					a.setStatus(StatusAgendamento.valueOf(statusStr));
+
+					lista.add(a);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
+	
 	public List<Agendamento> listarPorPrestadorEStatus(Connection conn, int idPrestador, StatusAgendamento status, int pagina) {
 		List<Agendamento> lista = new ArrayList<>();
 		String sql = "SELECT * FROM Agendamento WHERE id_prestador = ? AND status = ? ORDER BY data_agendamento, hora_agendamento "
@@ -114,6 +146,39 @@ public class AgendamentoDAO {
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 
 			stmt.setInt(1, idPrestador);
+			stmt.setString(2, status.name());
+			stmt.setInt(3, chamadosPorPagina);
+			stmt.setInt(4, chamadosPorPagina * pagina);
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) {
+					Agendamento a = new Agendamento();
+					a.setIdAgendamento(rs.getInt("id_agendamento"));
+					a.setIdCliente(rs.getInt("id_cliente"));
+					a.setIdPrestador(rs.getInt("id_prestador"));
+					a.setData(rs.getDate("data_agendamento").toLocalDate());
+	                a.setHorario(rs.getTime("hora_agendamento").toLocalTime());
+
+					String statusStr = rs.getString("status");
+					a.setStatus(StatusAgendamento.valueOf(statusStr));
+
+					lista.add(a);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return lista;
+	}
+	
+	public List<Agendamento> listarPorClienteEStatus(Connection conn, int idCliente, StatusAgendamento status, int pagina) {
+		List<Agendamento> lista = new ArrayList<>();
+		String sql = "SELECT * FROM Agendamento WHERE id_cliente = ? AND status = ? ORDER BY data_agendamento, hora_agendamento "
+				+ "LIMIT ? OFFSET ?";
+
+		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+			stmt.setInt(1, idCliente);
 			stmt.setString(2, status.name());
 			stmt.setInt(3, chamadosPorPagina);
 			stmt.setInt(4, chamadosPorPagina * pagina);

@@ -69,6 +69,8 @@ SELECT * FROM Prestador;
 SELECT * FROM Imagem_Portfolio;
 SELECT * FROM Disponibilidade;
 SELECT * FROM Agendamento;
+SELECT * FROM Log_Status_Agendamento;
 SHOW CREATE TABLE Prestador;
+
 
 

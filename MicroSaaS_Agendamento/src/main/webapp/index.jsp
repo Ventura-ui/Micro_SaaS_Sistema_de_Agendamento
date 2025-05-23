@@ -12,7 +12,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
 	rel="stylesheet">
-<link href="<%= request.getContextPath() %>/css/estilo.css" rel="stylesheet"> <%-- Caminho corrigido aqui --%>
+<link href="<%= request.getContextPath() %>/css/estilo.css" rel="stylesheet">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 
 	<div class="container mt-5 shadow-lg rounded">
         <div class="text-center mb-4">
-            <img src="<%= request.getContextPath() %>/imagens/TopBarber.png" alt="TopBarber Logo" class="img-fluid" style="max-height: 150px;">
+            <img src="<%= request.getContextPath() %>/imagens/TopBarberLogo.png" alt="TopBarber Logo" class="img-fluid" style="max-height: 150px;">
         </div>
 		<p class="text-center text-light mb-4">Sua barbearia moderna,
 			agora online.</p>
